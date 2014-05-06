@@ -13,5 +13,11 @@
   .form-group
     =f.label :password_confirmation
     =f.password_field :password_confirmation, class: 'form-control'
+  -if User.edit?(@current_user)
+    .row
+      .col-sm-3
+        .form-group
+          =f.label :role
+          =f.select :role, selectify(User::ROLES),class: 'from-control'
   .form-actions
     = f.submit nil, class: 'btn btn-primary'

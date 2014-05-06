@@ -1,3 +1,4 @@
+=link_to_back
 .page-header
   %h1
     =@person.name
@@ -9,9 +10,7 @@
       =image_tag @person.avatar.url(:medium), alt: @person.name
   .col-sm-9
     .btn-toolbar
-      =link_to people_path, class: 'btn btn-default' do
-        =fa_icon 'angle-left'
-        Назад
+
       -if @person.edit?(@current_user)
         =link_to edit_person_path(@person),class: 'btn btn-primary' do
           =fa_icon 'edit'

@@ -9,7 +9,6 @@ $padding-large-horizontal: 20px;
 
 $body-bg: #f2f2f2;
 
-
 @import 'bootstrap';
 @import 'token-input-bootstrap';
 
@@ -22,25 +21,35 @@ $body-bg: #f2f2f2;
   @extend .alert-success;
 }
 
-.form-actions{
+.form-actions {
   padding-top: $padding-base-vertical;
 }
 
-.narrow{
+.narrow {
   max-width: 600px;
   margin: 0 auto;
 }
-.radio,.radio-inline{
-  label{
+
+.radio, .radio-inline {
+  label {
     font-weight: normal;
   }
 }
 
-.btn-toolbar{
-  padding:  $padding-base-vertical 0;
+.btn-toolbar {
+  padding: $padding-base-vertical 0;
 }
 
-.media{
+.media {
   background: #fff;
   padding: $padding-base-vertical $padding-base-horizontal;
+}
+
+blockquote {
+  background: #fff;
+}
+
+.youtube {
+  height: 400px;
+  width: 100%;
 }

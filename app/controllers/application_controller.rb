@@ -12,9 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_auth
-    unless @current_user
-      redirect_to login_path, danger: "Доступ без авторизации запрещен"
-    end
+    render_error(login_path,"Доступ без авторизации запрещен") unless @current_user
   end
 
   def check_admin
@@ -26,5 +24,10 @@ class ApplicationController < ActionController::Base
         redirect_to root_path
       end
     end
+  end
+
+  def render_error(url,msg="Доступ запрещен")
+    flash[:danger]=msg
+    redirect_to url
   end
 end

@@ -11,6 +11,7 @@ class GenresController < ApplicationController
   end
 
   def show
+    @films=@genre.films.page(params[:page])
   end
 
 
@@ -26,7 +27,7 @@ class GenresController < ApplicationController
   def create
     @genre = Genre.new(genre_params)
     if @genre.save
-      redirect_to @genre, notice: 'Жанр создан.'
+      redirect_to @genre, notice: 'Жанр создан'
     else
       render :new
     end
@@ -35,7 +36,7 @@ class GenresController < ApplicationController
 
   def update
     if @genre.update(genre_params)
-      redirect_to @genre, notice: 'Жанр сохранен.'
+      redirect_to @genre, notice: 'Жанр сохранен'
     else
       render :edit
     end
@@ -62,14 +63,10 @@ class GenresController < ApplicationController
   end
 
   def check_edit
-    unless @country.edit?(@current_user)
-      redirect_to @country, danger: "Доступ запрещен"
-    end
+    render_error(@country) unless @country.edit?(@current_user)
   end
 
   def check_add
-    unless Country.add?(@current_user)
-      redirect_to countries_path, danger: "Доступ запрещен"
-    end
+    render_error(countries_path) unless Country.add?(@current_user)
   end
 end

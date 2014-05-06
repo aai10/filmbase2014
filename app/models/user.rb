@@ -4,8 +4,10 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
-  validates :password, presence: {on: :create}, length: {minimum: 6, allow_blank: true}
+  validates :password, length: {minimum: 6, allow_blank: true}
   validates :role, presence: true, inclusion: {in: 0...ROLES.size}
+
+  scope :ordering,->{order(:name)}
 
   before_validation :set_default_role
 
@@ -19,6 +21,10 @@ class User < ActiveRecord::Base
 
   def admin?
     role==1
+  end
+
+  def self.edit?(u)
+    u && u.admin?
   end
 
 

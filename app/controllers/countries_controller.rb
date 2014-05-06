@@ -9,9 +9,8 @@ class CountriesController < ApplicationController
     @countries = Country.ordering.page(params[:page])
   end
 
-  # GET /countries/1
-  # GET /countries/1.json
   def show
+    @films=@country.films.page(params[:page])
   end
 
   def new
@@ -24,7 +23,7 @@ class CountriesController < ApplicationController
   def create
     @country = Country.new(country_params)
     if @country.save
-      redirect_to @country, notice: 'Страна создана.'
+      redirect_to @country, notice: 'Страна создана'
     else
       render :new
     end
@@ -34,7 +33,7 @@ class CountriesController < ApplicationController
   def update
 
     if @country.update(country_params)
-      redirect_to @country, notice: 'Страна сохранена.'
+      redirect_to @country, notice: 'Страна сохранена'
     else
       render :edit
     end
@@ -43,9 +42,9 @@ class CountriesController < ApplicationController
 
   def destroy
     if @country.destroy
-      redirect_to countries_url, notice: 'Страна удалена.'
+      redirect_to countries_url, notice: 'Страна удалена'
     else
-      redirect_to @country, notice: 'Удаление невозможно.'
+      redirect_to @country, notice: 'Удаление страны невозможно'
     end
   end
 
@@ -61,14 +60,10 @@ class CountriesController < ApplicationController
   end
 
   def check_edit
-    unless @country.edit?(@current_user)
-      redirect_to @country, danger: "Доступ запрещен"
-    end
+    render_error(@country) unless @country.edit?(@current_user)
   end
 
   def check_add
-    unless Country.add?(@current_user)
-      redirect_to countries_path, danger: "Доступ запрещен"
-    end
+    render_error(countries_path) unless Country.add?(@current_user)
   end
 end
