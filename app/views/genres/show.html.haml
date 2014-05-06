@@ -1,0 +1,16 @@
+
+.page-header
+  %h1=@genre.name
+
+.btn-toolbar
+  =link_to genres_path, class: 'btn btn-default' do
+    =fa_icon 'angle-left'
+    Назад
+  -if @genre.edit?(@current_user)
+    =link_to edit_genre_path(@genre),class: 'btn btn-primary' do
+      =fa_icon 'edit'
+      Редактировать
+    =link_to @genre, class: 'btn btn-danger',method: :delete, data: {confirm: t('helpers.sure')} do
+      =fa_icon 'trash-o'
+      Удалить
+

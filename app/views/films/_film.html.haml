@@ -1,0 +1,5 @@
+=link_to film,class: 'list-group-item' do
+  -if film.cover?
+    .pull-right=image_tag film.cover.url(:thumb), alt: film.name
+  %h4=film.name
+  .clearfix

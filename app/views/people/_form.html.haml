@@ -1,0 +1,25 @@
+= form_for @person do |f|
+  =error_messages_for @person
+  .form-group
+    = f.label :name
+    = f.text_field :name,class: 'form-control'
+  .form-group
+    = f.label :origin_name
+    = f.text_field :origin_name,class: 'form-control'
+  .form-group
+    %div
+      %b=Person.human_attribute_name(:male)
+    -Person::SEX.each_with_index do |sex,i|
+      .radio-inline
+        %label
+          =f.radio_button :male, [true,false][i]
+          =sex
+  .form-group
+    = f.label :birthday
+    .row
+      .col-sm-2= f.text_field :birthday, class: 'form-control',value: (l(@person.birthday) if @person.birthday), data: {mask: :date}
+  .form-group
+    = f.label :avatar
+    = f.file_field :avatar
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'

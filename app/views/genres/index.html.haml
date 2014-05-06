@@ -1,0 +1,9 @@
+.page-header
+  %h1
+    Жанры
+    =link_to new_genre_path,class: 'btn btn-primary' do
+      =fa_icon 'plus'
+.list-group
+  -@genres.each do |genre|
+    =link_to genre.name,genre,class: 'list-group-item'
+=paginate @genres

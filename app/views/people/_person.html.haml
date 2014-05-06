@@ -1,0 +1,5 @@
+=link_to person,class: 'list-group-item' do
+  -if person.avatar?
+    .pull-right=image_tag person.avatar.url(:thumb), alt: person.name
+  %h4=person.name
+  .clearfix

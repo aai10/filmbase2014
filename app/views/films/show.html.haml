@@ -1,0 +1,50 @@
+.page-header
+  %h1
+    =@film.name
+    %small=@film.origin_name
+.btn-toolbar
+  =link_to films_path,class: 'btn btn-default' do
+    =fa_icon 'angle-left'
+    Назад
+  -if @film.edit?(@current_user)
+    =link_to edit_film_path(@film), class: 'btn btn-primary' do
+      =fa_icon 'edit'
+      Редактировать
+    =link_to @film,method: :delete, data: {confirm: t('helpers.sure')}, class: 'btn btn-danger' do
+      =fa_icon 'trash-o'
+      Удалить
+.row
+  .col-sm-3
+    -if @film.cover?
+      =image_tag @film.cover.url(:medium), alt: @film.name
+  .col-sm-9
+    %dl
+      -if @film.country
+        %dt=Film.human_attribute_name(:country)
+        %dd=link_to @film.country.name,@film.country
+      -if @film.genre
+        %dt=Film.human_attribute_name(:genre)
+        %dd=link_to @film.genre.name,@film.genre
+      -if @film.length
+        %dt=Film.human_attribute_name(:length)
+        %dd=@film.human_length
+      -if @film.year
+        %dt=Film.human_attribute_name(:year)
+        %dd=@film.year
+    -if @film.slogan.present?
+      %blockquote
+        %p=@film.slogan
+    -if @film.description.present?
+      %h4=Film.human_attribute_name(:description)
+      =simple_format @film.description
+    -if @film.director
+      %h4=Film.human_attribute_name(:director)
+      .list-group=render 'people/person', person: @film.director
+    -if @film.people.any?
+      %h4=Film.human_attribute_name(:people)
+      .list-group
+        -@film.people.each do |person|
+          =render 'people/person', person: person
+
+
+

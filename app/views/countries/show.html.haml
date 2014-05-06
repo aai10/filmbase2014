@@ -1,0 +1,13 @@
+.page-header
+  %h1=@country.name
+.btn-toolbar
+  =link_to countries_path, class: 'btn btn-default' do
+    =fa_icon 'angle-left'
+    Назад
+  -if @country.edit?(@current_user)
+    =link_to edit_country_path(@country),class: 'btn btn-primary' do
+      =fa_icon 'edit'
+      Редактировать
+    =link_to @country,class: 'btn btn-danger',method: :delete, data: {confirm: t('helpers.sure')} do
+      =fa_icon 'trash-o'
+      Удалить

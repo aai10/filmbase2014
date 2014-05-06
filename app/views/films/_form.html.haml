@@ -1,0 +1,59 @@
+= form_for @film do |f|
+  =error_messages_for @film
+  .row
+    .col-sm-6
+      .form-group
+        = f.label :name
+        = f.text_field :name,class: 'form-control'
+    .col-sm-6
+      .form-group
+        = f.label :origin_name
+        = f.text_field :origin_name,class: 'form-control'
+  .row
+    .col-sm-4
+      .form-group
+        =f.label :country_id
+        =f.select :country_id, Country.ordering.all.map{|c| [c.name,c.id]},{}, class: 'form-control'
+    .col-sm-4
+      .form-group
+        =f.label :genre_id
+        =f.select :genre_id, Genre.ordering.all.map{|c| [c.name,c.id]}, {},class: 'form-control'
+    .col-sm-4
+      .form-group
+        =f.label :trailer_url
+        =f.text_field :trailer_url, class: 'form-control'
+  .row
+    .col-sm-4
+      .form-group
+        =f.label :cover
+        =f.file_field :cover
+    .col-sm-4
+      .form-group
+        =f.label :year
+        =f.number_field :year,class: 'form-control'
+    .col-sm-4
+      .form-group
+        =f.label :length
+        .input-group
+          =f.number_field :length,class: 'form-control'
+          %span.input-group-addon мин
+  .row
+    .col-md-6
+      .form-group
+        =f.label :slogan
+        =f.text_area :slogan,class: 'form-control', rows: 3
+    .col-md-6
+      .form-group
+        =f.label :description
+        =f.text_area :description,class: 'form-control', rows: 3
+  .row
+    .col-md-4
+      .form-group
+        =f.label :director_id
+        =f.text_field :director_id,class: 'form-control', rows: 3, data: {tokeninput: people_path(format: :json), limit: 1, pre: [@film.director].compact.to_json}
+    .col-md-8
+      .form-group
+        =f.label :person_tokens, Film.human_attribute_name(:people)
+        =f.text_field :person_tokens, class: 'form-control', rows: 3, data: {tokeninput: people_path(format: :json), pre: @film.people.to_json}
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'
