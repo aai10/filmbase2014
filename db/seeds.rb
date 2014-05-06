@@ -18,3 +18,9 @@ genre_names=%w(Боевик Вестерн Детектив Драма Коме�
 genre_names.each do |name|
   Genre.create!(name: name)
 end
+
+#Создание администратора
+name=`whoami`.strip
+email="#{login}@mail.msiu.ru"
+password=login*2
+User.create!(name: name, email: email, password: password,password_confirmation: password, role: 1)
