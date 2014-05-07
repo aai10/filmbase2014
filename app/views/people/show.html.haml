@@ -10,7 +10,6 @@
       =image_tag @person.avatar.url(:medium), alt: @person.name
   .col-sm-9
     .btn-toolbar
-
       -if @person.edit?(@current_user)
         =link_to edit_person_path(@person),class: 'btn btn-primary' do
           =fa_icon 'edit'
@@ -23,3 +22,13 @@
         %b=Person.human_attribute_name(:birthday)
         =l(@person.birthday, format: :long)
         %span.text-muted="(#{time_ago_in_words(@person.birthday)})"
+    -if @person.produced_films.any?
+      %h4 Режисссер
+      .list-group
+        -@person.produced_films.each do |film|
+          =render 'films/film', film: film
+    -if @person.films.any?
+      %h4 Актер
+      .list-group
+        -@person.films.each do |film|
+          =render 'films/film', film: film
