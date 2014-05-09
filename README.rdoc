@@ -1,28 +1,10 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Для запуска приложения <tt>bundle; bundle exec rake db:create db:migrate db:seed</tt>
 
-Things you may want to cover:
+Администратор:
 
-* Ruby version
+Имя пользователя: ваше имя пользователя в системе
+Пароль: имя пользователя дважды
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Для импорта 10 фильмов с kinopoisk.ru выполните <tt>bundle exec rake kinopoisk:import</tt>
