@@ -17,6 +17,7 @@ class PeopleController < ApplicationController
   end
 
   def show
+    @person=Person.full.find(params[:id])
   end
 
 

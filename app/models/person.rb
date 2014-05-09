@@ -14,6 +14,8 @@ class Person < ActiveRecord::Base
 
 
   scope :ordering, ->{order(:name)}
+  scope :full, ->{includes(:films,:produced_films)}
+
 
   before_destroy :can_destroy?
 

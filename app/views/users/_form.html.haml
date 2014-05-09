@@ -18,6 +18,6 @@
       .col-sm-3
         .form-group
           =f.label :role
-          =f.select :role, selectify(User::ROLES),class: 'from-control'
+          =f.select :role, selectify(User::ROLES),{},class: 'form-control'
   .form-actions
     = f.submit nil, class: 'btn btn-primary'

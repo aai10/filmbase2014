@@ -63,10 +63,10 @@ class GenresController < ApplicationController
   end
 
   def check_edit
-    render_error(@country) unless @country.edit?(@current_user)
+    render_error(@genre) unless @genre.edit?(@current_user)
   end
 
   def check_add
-    render_error(countries_path) unless Country.add?(@current_user)
+    render_error(genres_path) unless Genre.add?(@current_user)
   end
 end
